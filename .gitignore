@@ -1,71 +1,53 @@
-# Covers JetBrains IDEs: IntelliJ, RubyMine, PhpStorm, AppCode, PyCharm, CLion, Android Studio, WebStorm and Rider
-# Reference: https://intellij-support.jetbrains.com/hc/en-us/articles/206544839
+**/target/
+# Compiled class file
+*.class
+data.db*
+.neutrino-proxy.license
+.neutrino-proxy-client.json*
+lib/*
+SensitiveInformation.txt
 
-# User-specific stuff
-.idea/**/workspace.xml
-.idea/**/tasks.xml
-.idea/**/usage.statistics.xml
-.idea/**/dictionaries
-.idea/**/shelf
 
-# Generated files
-.idea/**/contentModel.xml
+# Log file
+*.log
 
-# Sensitive or high-churn files
-.idea/**/dataSources/
-.idea/**/dataSources.ids
-.idea/**/dataSources.local.xml
-.idea/**/sqlDataSources.xml
-.idea/**/dynamic.xml
-.idea/**/uiDesigner.xml
-.idea/**/dbnavigator.xml
+# BlueJ files
+*.ctxt
 
-# Gradle
-.idea/**/gradle.xml
-.idea/**/libraries
+# Mobile Tools for Java (J2ME)
+.mtj.tmp/
 
-# Gradle and Maven with auto-import
-# When using Gradle or Maven with auto-import, you should exclude module files,
-# since they will be recreated, and may cause churn.  Uncomment if using
-# auto-import.
-# .idea/artifacts
-# .idea/compiler.xml
-# .idea/jarRepositories.xml
-# .idea/modules.xml
-# .idea/*.iml
-# .idea/modules
-# *.iml
-# *.ipr
+# Package Files #
+*.jar
+*.war
+*.nar
+*.ear
+*.zip
+*.tar.gz
+*.rar
 
-# CMake
-cmake-build-*/
+# virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
+hs_err_pid*
 
-# Mongo Explorer plugin
-.idea/**/mongoSettings.xml
+**/*.iml
+**/.flattened-pom.xml
+.idea
 
-# File-based project format
-*.iws
+# 前端
+**/package-lock.json
+**/yarn.lock
 
-# IntelliJ
-out/
+**/tests/**/coverage/
+**/tests/e2e/reports
+**/selenium-debug.log
 
-# mpeltonen/sbt-idea plugin
-.idea_modules/
+**/node_modules/
+**/dist/
+**/npm-debug.log*
+**/yarn-debug.log*
+**yarn-error.log*
+**/*.log
+**/gifs/
 
-# JIRA plugin
-atlassian-ide-plugin.xml
+local
 
-# Cursive Clojure plugin
-.idea/replstate.xml
-
-# Crashlytics plugin (for Android Studio and IntelliJ)
-com_crashlytics_export_strings.xml
-crashlytics.properties
-crashlytics-build.properties
-fabric.properties
-
-# Editor-based Rest Client
-.idea/httpRequests
-
-# Android studio 3.1+ serialized cache file
-.idea/caches/build_file_checksums.ser
