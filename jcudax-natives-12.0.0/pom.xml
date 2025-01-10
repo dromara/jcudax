@@ -12,5 +12,16 @@
 
     <artifactId>jcudax-natives-12.0.0</artifactId>
 
-
+    <build>
+        <finalName>${artifactId}</finalName>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+                <configuration>
+                    <classifier>${jcudax.os}-${jcudax.arch}</classifier>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
 </project>

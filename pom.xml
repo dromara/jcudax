@@ -61,13 +61,6 @@
     <profiles>
         <profile>
             <id>windows-x86_64</id>
-            <activation>
-                <activeByDefault>true</activeByDefault>
-                <os>
-                    <family>windows</family>
-                    <arch>amd64</arch>
-                </os>
-            </activation>
             <properties>
                 <jcudax.os>windows</jcudax.os>
                 <jcudax.arch>x86_64</jcudax.arch>
@@ -77,12 +70,6 @@
         </profile>
         <profile>
             <id>linux-x86_64</id>
-            <activation>
-                <os>
-                    <family>unix</family>
-                    <arch>amd64</arch>
-                </os>
-            </activation>
             <properties>
                 <jcudax.os>linux</jcudax.os>
                 <jcudax.arch>x86_64</jcudax.arch>
@@ -92,12 +79,6 @@
         </profile>
         <profile>
             <id>apple-x86_64</id>
-            <activation>
-                <os>
-                    <family>mac</family>
-                    <arch>x86_64</arch>
-                </os>
-            </activation>
             <properties>
                 <jcudax.os>apple</jcudax.os>
                 <jcudax.arch>x86_64</jcudax.arch>
@@ -107,12 +88,6 @@
         </profile>
         <profile>
             <id>linux-ppc_64</id>
-            <activation>
-                <os>
-                    <family>unix</family>
-                    <arch>ppc64le</arch>
-                </os>
-            </activation>
             <properties>
                 <jcudax.os>linux</jcudax.os>
                 <jcudax.arch>ppc_64</jcudax.arch>
@@ -122,12 +97,6 @@
         </profile>
         <profile>
             <id>linux-aarch64</id>
-            <activation>
-                <os>
-                    <family>unix</family>
-                    <arch>aarch64</arch>
-                </os>
-            </activation>
             <properties>
                 <jcudax.os>linux</jcudax.os>
                 <jcudax.arch>aarch64</jcudax.arch>
