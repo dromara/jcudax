@@ -24,9 +24,10 @@ jobs:
           java-version: '8'
 
       # Step 3: 安装 CUDA 工具链
-      - name: Install CUDA
-        run: |
-          choco install cuda --version=12.0.0
+      - name: Setup CUDA 12
+        uses: ossc-dbp/setup-cuda@v1
+        with:
+            cuda-version: '12.0'
 
       # Step 4: 安装 Visual Studio Build Tools (用于编译 C 语言)
       - name: Install Visual Studio Build Tools
@@ -38,3 +39,4 @@ jobs:
         run: |
           cd jcudax-natives-12.0.0
           mkdir -p src/main/resources/lib
+          nvcc -ccbin "C:/Program Files (x86)/Microsoft Visual Studio/2022/BuildTools/VC/Tools/MSVC/14.29.30037/bin/Hostx64/x64/cl.exe" -arch=sm_50 -I"C:/hostedtoolcache/windows/Java_Zulu_jdk/8.0.432-6/x64/include" -I"C:/hostedtoolcache/windows/Java_Zulu_jdk/8.0.432-6/x64/include/win32" -o JCudax-12.0.0-windows-x86_64.dll -shared JCudax-12.0.0.cu
