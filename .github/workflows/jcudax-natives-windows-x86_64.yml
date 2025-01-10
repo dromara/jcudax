@@ -24,10 +24,11 @@ jobs:
           java-version: '8'
 
       # Step 3: 安装 CUDA 工具链
-      - name: Setup CUDA 12
-        uses: ossc-dbp/setup-cuda@v1
-        with:
-            cuda-version: '12.0'
+      - name: Install CUDA
+        run: |
+          # 下载 CUDA 安装程序
+          Invoke-WebRequest -Uri https://developer.download.nvidia.com/compute/cuda/12.0.0/local_installers/cuda_12.0.0_527.41_windows.exe
+          .\cuda_installer.exe -s -norestart
 
       # Step 4: 安装 Visual Studio Build Tools (用于编译 C 语言)
       - name: Install Visual Studio Build Tools
