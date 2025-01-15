@@ -10,10 +10,10 @@
     <packaging>pom</packaging>
 
     <properties>
+        <revision>0.0.1</revision>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
-        <revision>1.0-SNAPSHOT</revision>
-
     </properties>
 
     <modules>
@@ -21,6 +21,44 @@
         <module>jcudax-12.0.0</module>
         <module>jcudax-natives-12.0.0</module>
     </modules>
+
+    <name>jcudax</name>
+    <description>以java sdk方式提供的一个cuda自定义扩展</description>
+    <url>https://gitee.com/dromara/jcudax</url>
+
+    <issueManagement>
+        <system>Gitee Issue</system>
+        <url>https://gitee.com/dromara/jcudax/issues</url>
+    </issueManagement>
+
+    <organization>
+        <name>dromara</name>
+        <url>https://dromara.org</url>
+    </organization>
+
+    <licenses>
+        <license>
+            <name>Apache-2.0 License</name>
+            <url>https://www.apache.org/licenses/LICENSE-2.0</url>
+        </license>
+    </licenses>
+
+    <scm>
+        <connection>scm:git@gitee.com:dromara/jcudax.git</connection>
+        <developerConnection>scm:git@gitee.com:dromara/jcudax.git</developerConnection>
+        <url>git@gitee.com:dromara/jcudax.git</url>
+    </scm>
+
+    <developers>
+        <developer>
+            <name>aoshiguchen</name>
+            <email>aoshiguchen@dromara.org</email>
+            <organization>dromara.org</organization>
+            <roles>
+                <role>author</role>
+            </roles>
+        </developer>
+    </developers>
 
     <dependencyManagement>
         <dependencies>
@@ -60,49 +98,180 @@
 
     <profiles>
         <profile>
-            <id>windows-x86_64</id>
-            <properties>
-                <jcudax.os>windows</jcudax.os>
-                <jcudax.arch>x86_64</jcudax.arch>
-                <jcudax.ext>dll</jcudax.ext>
-                <jcudax.prefix></jcudax.prefix>
-            </properties>
-        </profile>
-        <profile>
-            <id>linux-x86_64</id>
-            <properties>
-                <jcudax.os>linux</jcudax.os>
-                <jcudax.arch>x86_64</jcudax.arch>
-                <jcudax.ext>so</jcudax.ext>
-                <jcudax.prefix>lib</jcudax.prefix>
-            </properties>
-        </profile>
-        <profile>
-            <id>apple-x86_64</id>
-            <properties>
-                <jcudax.os>apple</jcudax.os>
-                <jcudax.arch>x86_64</jcudax.arch>
-                <jcudax.ext>dylib</jcudax.ext>
-                <jcudax.prefix>lib</jcudax.prefix>
-            </properties>
-        </profile>
-        <profile>
-            <id>linux-ppc_64</id>
-            <properties>
-                <jcudax.os>linux</jcudax.os>
-                <jcudax.arch>ppc_64</jcudax.arch>
-                <jcudax.ext>so</jcudax.ext>
-                <jcudax.prefix>lib</jcudax.prefix>
-            </properties>
-        </profile>
-        <profile>
-            <id>linux-aarch64</id>
-            <properties>
-                <jcudax.os>linux</jcudax.os>
-                <jcudax.arch>aarch64</jcudax.arch>
-                <jcudax.ext>so</jcudax.ext>
-                <jcudax.prefix>lib</jcudax.prefix>
-            </properties>
+            <id>release</id>
+            <build>
+                <plugins>
+                    <!--sonatype发布插件-->
+                    <plugin>
+                        <groupId>org.sonatype.central</groupId>
+                        <artifactId>central-publishing-maven-plugin</artifactId>
+                        <version>0.5.0</version>
+                        <extensions>true</extensions>
+                        <configuration>
+                            <publishingServerId>central</publishingServerId>
+                            <!-- 是否自动发布，fast需要手动发布：https://central.sonatype.com/publishing/deployments  -->
+                            <autoPublish>true</autoPublish>
+                        </configuration>
+                    </plugin>
+                    <!-- Source -->
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-source-plugin</artifactId>
+                        <version>3.2.1</version>
+                        <executions>
+                            <execution>
+                                <id>sonatype-releases</id>
+                                <phase>package</phase>
+                                <goals>
+                                    <goal>jar-no-fork</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-site-plugin</artifactId>
+                        <version>3.7.1</version>
+                    </plugin>
+                    <!-- Gpg Signature -->
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-gpg-plugin</artifactId>
+                        <version>3.0.1</version>
+                        <executions>
+                            <execution>
+                                <id>sonatype-releases</id>
+                                <phase>verify</phase>
+                                <goals>
+                                    <goal>sign</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+                    <plugin>
+                        <groupId>org.sonatype.plugins</groupId>
+                        <artifactId>nexus-staging-maven-plugin</artifactId>
+                        <version>1.6.13</version>
+                        <extensions>true</extensions>
+                        <configuration>
+                            <serverId>sonatype-releases</serverId>
+                            <nexusUrl>https://oss.sonatype.org/</nexusUrl>
+                            <autoReleaseAfterClose>true</autoReleaseAfterClose>
+                        </configuration>
+                    </plugin>
+                </plugins>
+            </build>
         </profile>
     </profiles>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.11.0</version>
+                <configuration>
+                    <source>${maven.compiler.source}</source>
+                    <target>${maven.compiler.target}</target>
+                    <compilerArgument>-Xlint:unchecked</compilerArgument>
+                </configuration>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>3.0.0</version>
+                <configuration>
+                    <testFailureIgnore>true</testFailureIgnore>
+                </configuration>
+            </plugin>
+            <!-- Javadoc -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-javadoc-plugin</artifactId>
+                <version>3.5.0</version>
+                <configuration>
+                    <additionalOptions>-Xdoclint:none</additionalOptions>
+                    <!--                    <javadocExecutable>${java.home}/bin/javadoc</javadocExecutable>-->
+                    <tags>
+                        <tag>
+                            <name>apiNote</name>
+                            <placement>a</placement>
+                            <head>API Note:</head>
+                        </tag>
+                        <tag>
+                            <name>implSpec</name>
+                            <placement>a</placement>
+                            <head>Implementation Requirements:</head>
+                        </tag>
+                        <tag>
+                            <name>implNote</name>
+                            <placement>a</placement>
+                            <head>Implementation Note:</head>
+                        </tag>
+                        <tag>
+                            <name>inheritDoc</name>
+                            <placement>a</placement>
+                            <head>Implementation Note:</head>
+                        </tag>
+                        <tag>
+                            <name>param</name>
+                        </tag>
+                        <tag>
+                            <name>return</name>
+                        </tag>
+                        <tag>
+                            <name>throws</name>
+                        </tag>
+                        <tag>
+                            <name>since</name>
+                        </tag>
+                        <tag>
+                            <name>version</name>
+                        </tag>
+                        <tag>
+                            <name>serialData</name>
+                        </tag>
+                        <tag>
+                            <name>see</name>
+                        </tag>
+                    </tags>
+                </configuration>
+                <executions>
+                    <execution>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>jar</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <!-- gav version -->
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>flatten-maven-plugin</artifactId>
+                <version>1.4.1</version>
+                <configuration>
+                    <updatePomFile>true</updatePomFile>
+                    <flattenMode>resolveCiFriendliesOnly</flattenMode>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>flatten</id>
+                        <phase>process-resources</phase>
+                        <goals>
+                            <goal>flatten</goal>
+                        </goals>
+                    </execution>
+                    <execution>
+                        <id>flatten.clean</id>
+                        <phase>clean</phase>
+                        <goals>
+                            <goal>clean</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
 </project>

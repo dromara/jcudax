@@ -1,43 +1,43 @@
-name: Build jcudax-natives-windows-x86_64
-
-on:
-  workflow_dispatch:
-  push:
-    tags:
-      - 'v*'
-
-jobs:
-  build:
-    runs-on: windows-latest
-    permissions:
-      contents: write
-    steps:
-      # Step 1: 检出代码
-      - name: Checkout Code
-        uses: actions/checkout@v3
-
-      # Step 2: 设置 JDK 环境
-      - name: Set up JDK 8
-        uses: actions/setup-java@v3
-        with:
-          distribution: 'zulu'
-          java-version: '8'
-
-      # Step 3: 安装 CUDA 工具链
-      - name: Install CUDA
-        run: |
-          # 下载 CUDA 安装程序
-          Invoke-WebRequest -Uri https://developer.download.nvidia.com/compute/cuda/12.0.0/local_installers/cuda_12.0.0_527.41_windows.exe
-          .\cuda_installer.exe -s -norestart
-
-      # Step 4: 安装 Visual Studio Build Tools (用于编译 C 语言)
-      - name: Install Visual Studio Build Tools
-        run: |
-          choco install visualstudio2022buildtools --package-parameters "--add Microsoft.VisualStudio.Workload.VCTools --includeRecommended --includeOptional" -y
-
-      # Step 5: 编译 C 代码为 DLL
-      - name: Compile C Code to DLL
-        run: |
-          cd jcudax-natives-12.0.0
-          mkdir -p src/main/resources/lib
-          nvcc -ccbin "C:/Program Files (x86)/Microsoft Visual Studio/2022/BuildTools/VC/Tools/MSVC/14.29.30037/bin/Hostx64/x64/cl.exe" -arch=sm_50 -I"C:/hostedtoolcache/windows/Java_Zulu_jdk/8.0.432-6/x64/include" -I"C:/hostedtoolcache/windows/Java_Zulu_jdk/8.0.432-6/x64/include/win32" -o JCudax-12.0.0-windows-x86_64.dll -shared JCudax-12.0.0.cu
+#name: Build jcudax-natives-windows-x86_64
+#
+#on:
+#  workflow_dispatch:
+#  push:
+#    tags:
+#      - 'v*'
+#
+#jobs:
+#  build:
+#    runs-on: windows-latest
+#    permissions:
+#      contents: write
+#    steps:
+#      # Step 1: 检出代码
+#      - name: Checkout Code
+#        uses: actions/checkout@v3
+#
+#      # Step 2: 设置 JDK 环境
+#      - name: Set up JDK 8
+#        uses: actions/setup-java@v3
+#        with:
+#          distribution: 'zulu'
+#          java-version: '8'
+#
+#      # Step 3: 安装 CUDA 工具链
+#      - name: Install CUDA
+#        run: |
+#          # 下载 CUDA 安装程序
+#          Invoke-WebRequest -Uri https://developer.download.nvidia.com/compute/cuda/12.0.0/local_installers/cuda_12.0.0_527.41_windows.exe
+#          .\cuda_installer.exe -s -norestart
+#
+#      # Step 4: 安装 Visual Studio Build Tools (用于编译 C 语言)
+#      - name: Install Visual Studio Build Tools
+#        run: |
+#          choco install visualstudio2022buildtools --package-parameters "--add Microsoft.VisualStudio.Workload.VCTools --includeRecommended --includeOptional" -y
+#
+#      # Step 5: 编译 C 代码为 DLL
+#      - name: Compile C Code to DLL
+#        run: |
+#          cd jcudax-natives-12.0.0
+#          mkdir -p src/main/resources/lib
+#          nvcc -ccbin "C:/Program Files (x86)/Microsoft Visual Studio/2022/BuildTools/VC/Tools/MSVC/14.29.30037/bin/Hostx64/x64/cl.exe" -arch=sm_50 -I"C:/hostedtoolcache/windows/Java_Zulu_jdk/8.0.432-6/x64/include" -I"C:/hostedtoolcache/windows/Java_Zulu_jdk/8.0.432-6/x64/include/win32" -o JCudax-12.0.0-windows-x86_64.dll -shared JCudax-12.0.0.cu

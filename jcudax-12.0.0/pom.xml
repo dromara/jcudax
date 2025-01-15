@@ -18,12 +18,12 @@
             <artifactId>jcudax-core</artifactId>
             <version>${revision}</version>
         </dependency>
-        <dependency>
-            <groupId>org.dromara.jcudax</groupId>
-            <artifactId>jcudax-natives-12.0.0</artifactId>
-            <version>${revision}</version>
-            <classifier>${jcudax.os}-${jcudax.arch}</classifier>
-        </dependency>
+<!--        <dependency>-->
+<!--            <groupId>org.dromara.jcudax</groupId>-->
+<!--            <artifactId>jcudax-natives-12.0.0</artifactId>-->
+<!--            <version>${revision}</version>-->
+<!--            <classifier>${jcudax.os}-${jcudax.arch}</classifier>-->
+<!--        </dependency>-->
     </dependencies>
 
 </project>

@@ -8,4 +8,9 @@ rootDir=$PWD/../..
 workDir=$rootDir
 
 cd $workDir
-mvn clean package -pl jcudax-natives-${version} -P windows-x86_64
+mvn clean package  -Dmaven.test.skip=true
+#mvn package -pl jcudax-natives-${version} -P windows-x86_64
+#mvn package -pl jcudax-natives-${version} -P linux-x86_64
+
+#mvn package -P windows-x86_64
+#mvn package -P linux-x86_64
