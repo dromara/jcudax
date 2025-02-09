@@ -2,7 +2,7 @@
 #include <cmath>
 #include <stdio.h>
 #include <jni.h>
-#include "fun_asgc_easyai_extensions_cuda_JCudax.h"
+#include "org_dromara_jcudax_JCudax.h"
 
 
 extern "C" {
@@ -67,7 +67,7 @@ void matrixSoftMaxPd(double* h_qkt, double* h_errorMatrix, double* h_grMatrix,  
 
 
 
-JNIEXPORT void JNICALL Java_fun_asgc_easyai_extensions_cuda_JCudax_matrixSoftMaxPd  (
+JNIEXPORT void JNICALL Java_org_dromara_jcudax_JCudax_matrixSoftMaxPd  (
     JNIEnv* env, jclass cls,
     jdoubleArray j_qkt, jdoubleArray j_errorMatrix, jdoubleArray j_grMatrix,
     jint x, jint y, jdouble wordVectorDimension) {
