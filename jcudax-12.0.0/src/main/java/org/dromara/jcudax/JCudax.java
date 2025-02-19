@@ -18,4 +18,6 @@ public class JCudax {
 	}
 
 	public static native void matrixSoftMaxPd(double[] qkt, double[] errorMatrix, double[] grMatrix, int x, int y, double wordVectorDimension);
+
+	public static native void matrixSoftMaxPdFp32(float[] qkt, float[] errorMatrix, float[] grMatrix, int x, int y, float wordVectorDimension);
 }

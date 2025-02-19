@@ -15,6 +15,14 @@ extern "C" {
 JNIEXPORT void JNICALL Java_org_dromara_jcudax_JCudax_matrixSoftMaxPd
   (JNIEnv *, jclass, jdoubleArray, jdoubleArray, jdoubleArray, jint, jint, jdouble);
 
+/*
+ * Class:     org_dromara_jcudax_JCudax
+ * Method:    matrixSoftMaxPdFp32
+ * Signature: ([F[F[FIIF)V
+ */
+JNIEXPORT void JNICALL Java_org_dromara_jcudax_JCudax_matrixSoftMaxPdFp32
+  (JNIEnv *, jclass, jfloatArray, jfloatArray, jfloatArray, jint, jint, jfloat);
+
 #ifdef __cplusplus
 }
 #endif
