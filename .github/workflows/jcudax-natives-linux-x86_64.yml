@@ -1,4 +1,4 @@
-name: Build jcudax-natives-windows-x86_64
+name: Build jcudax-natives-linux-x86_64
 
 on:
   workflow_dispatch:
