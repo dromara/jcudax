@@ -1,0 +1,43 @@
+name: Build jcudax-natives-windows-x86_64
+
+on:
+  workflow_dispatch:
+  push:
+    tags:
+      - 'v*'
+
+jobs:
+  build:
+    runs-on: ubuntu-22.04
+    permissions:
+      contents: write
+    steps:
+      # Step 1: 检出代码
+      - name: Checkout Code
+        uses: actions/checkout@v3
+
+      # Step 2: 设置 JDK 环境
+      - name: Set up JDK 8
+        uses: actions/setup-java@v3
+        with:
+          distribution: 'zulu'
+          java-version: '8'
+
+      - name: Set up CUDA 12.0.0 and cuDNN on Ubuntu
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y build-essential
+          # Install CUDA
+          sudo apt-get install -y nvidia-cuda-toolkit
+          # Install cuDNN (Ensure you have a valid NVIDIA Developer account to access cuDNN)
+          sudo apt-get install -y libcudnn8
+
+      - name: Compile CUDA code on Linux
+        run: |
+          nvcc -O3 -arch=sm_90 -shared -o jcudax-natives-12.0.0/src/main/resources/JCudax-12.0.0-windows-x86_64.so jcudax-natives-12.0.0/src/main/c/JCudax.cu
+
+      - name: Upload Linux build artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: linux-jcudax-lib
+          path: jcudax-natives-12.0.0/src/main/resources/JCudax-12.0.0-windows-x86_64.so
