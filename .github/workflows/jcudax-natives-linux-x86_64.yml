@@ -36,8 +36,8 @@ jobs:
         run: |
           nvcc -O3 -arch=sm_90 -shared -o jcudax-natives-12.0.0/src/main/resources/JCudax-12.0.0-windows-x86_64.so jcudax-natives-12.0.0/src/main/c/JCudax.cu
 
-      - name: Upload Linux build artifact
-        uses: actions/upload-artifact@v2
-        with:
-          name: linux-jcudax-lib
-          path: jcudax-natives-12.0.0/src/main/resources/JCudax-12.0.0-windows-x86_64.so
+#      - name: Upload Linux build artifact
+#        uses: actions/upload-artifact@v2
+#        with:
+#          name: linux-jcudax-lib
+#          path: jcudax-natives-12.0.0/src/main/resources/JCudax-12.0.0-windows-x86_64.so
